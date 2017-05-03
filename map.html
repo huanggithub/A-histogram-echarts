@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="js/echarts.js"></script>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 600px;height:400px;"></div>
+<div id="main-2" style="width: 600px;height:400px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: '区县厅店总量及环比情况'
+        },
+        tooltip: {},
+        legend: {
+            data:['总量','环比']
+        },
+        grid:{
+            y2:100
+        },
+        xAxis: {
+            type: 'category',
+            data: ["全市","东湖区","西湖区","青云谱区","湾里区","新建区","南昌县","进贤县","安义县"],
+//            min:0,
+//            max:10,
+            axisLabel: {
+//                type: 'shadow',
+                show:true,
+                interval: 0,
+                textStyle: {
+                    color: "rgb(98,177,224)",
+                    fontSize:14,
+                    fontWeight:900
+                },
+                formatter:function(value)
+                {
+                    return value.split("").join("\n");
+                },
+            },
+            axisLine:{
+                lineStyle:{
+                    color:"#B2B2B2"
+                }
+            },
+            axisTick: {
+                show: false
+            },
+            splitLine: {
+                show: true
+            },
+        },
+        yAxis: [
+            {
+                type: 'value',
+                min: 0,
+                max: 30000,
+//                interval: ,
+                axisLabel: {
+                    formatter: '{value} '
+                },
+                axisLine:{
+                    lineStyle:{
+                        color:"#B2B2B2"
+                    }
+                },
+                axisTick: {
+                    show: false
+                }
+            },
+            {
+                type: 'value',
+                min: 0,
+                max: 30,
+                interval: 5,
+                axisLabel: {
+                    formatter: '{value} %'
+                },
+                axisLine:{
+                    lineStyle:{
+                        color:"#B2B2B2"
+                    }
+                },
+                axisTick: {
+                    show: false
+                }
+            },
+        ],
+        series: [{
+            name: '总量',
+            type: 'bar',
+            data: [8000, 10000, 12000, 7000, 20000, 10000,6000,7500,6500],
+            barWidth:14,
+            itemStyle:{
+                normal:{
+                    color:"rgb(0,128,204)",
+                    barBorderRadius:[7,7,7,7]
+                }
+            }
+        },
+            {
+                name: '环比',
+                type:'line',
+                yAxisIndex: 1,
+                data: [5, 20, 6, 10, 10, 20,20,15,16],
+                itemStyle:{
+                    normal:{
+                        color:"rgb(163,210,59)"
+                    }
+                }
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    function f() {
+        var a=[];
+        var i;
+        for(i=0;i<3;i++){
+            a[i]=function () {
+                return i;
+            }
+        }
+        return a;
+    }
+
+</script>
+</body>
+</html>
